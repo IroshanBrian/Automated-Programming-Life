@@ -20,7 +20,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
 # Prompt for project name
 $projectName = Read-Host "Enter Project Name: "
 
-if ([string]:IsNullOrWhiteSpace($projectName)) {
+if ([string]::IsNullOrWhiteSpace($projectName)) {
     Write-Host "[ERROR] Project name cannot be empty." -ForegroundColor Red
     exit
 }
