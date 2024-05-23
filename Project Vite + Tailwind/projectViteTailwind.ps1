@@ -13,7 +13,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     $selectedFolder = $folderBrowser.SelectedPath
     Set-Location $selectedFolder
 } else {
-    Write-Host "[ERROR] Folder selection canceled."
+    Write-Host "[❌] Folder selection canceled."
     exit
 }
 
@@ -23,7 +23,7 @@ $projectName = Read-Host "Enter Project Name: "
 # Create the Vite project
 npm create vite@latest $projectName --
 
-Write-Host "[INFO] Project Created Successfully!"
+Write-Host "[✅] Project Created Successfully!"
 
 # Navigate to the project directory
 Set-Location $projectName
@@ -35,7 +35,7 @@ npm install -D tailwindcss postcss autoprefixer
 # Initialize Tailwind CSS
 npx tailwindcss init -p
 
-Write-Host "[INFO] Tailwind Installed Successfully!"
+Write-Host "[✅] Tailwind Installed Successfully!"
 
 # Configure Tailwind
 $tailwindConfigPath = "tailwind.config.js"
@@ -54,15 +54,15 @@ export default {
 '@
 
 Set-Content -Path $tailwindConfigPath -Value $tailwindConfigContent
-Write-Output "[INFO] tailwind.config.js content has been replaced successfully."
+Write-Output "[✅] tailwind.config.js content has been replaced successfully."
 
 # Remove app.css if it exists
 $appCssPath = "src/app.css"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[INFO] Removing app.css successfully."
+    Write-Output "[✅] Removing app.css successfully."
 } else {
-    Write-Output "[INFO] app.css does not exist."
+    Write-Output "[✅] app.css does not exist."
 }
 
 # Add Tailwind directives to index.css
@@ -94,12 +94,12 @@ export default App
 
 if (Test-Path -Path $appTsxPath) {
     Set-Content -Path $appTsxPath -Value $appComponentContent
-    Write-Output "[INFO] Cleaned the App.tsx file successfully."
+    Write-Output "[✅] Cleaned the App.tsx file successfully."
 } elseif (Test-Path -Path $appJsxPath) {
     Set-Content -Path $appJsxPath -Value $appComponentContent
-    Write-Output "[INFO] Cleaned the App.jsx file successfully."
+    Write-Output "[✅] Cleaned the App.jsx file successfully."
 } else {
-    Write-Output "[INFO] App component file does not exist."
+    Write-Output "[✅] App component file does not exist."
 }
 
 
@@ -107,18 +107,18 @@ if (Test-Path -Path $appTsxPath) {
 $appCssPath = "src/assets/react.svg"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[INFO] Removing react.svg successfully."
+    Write-Output "[✅] Removing react.svg successfully."
 } else {
-    Write-Output "[INFO] react.svg does not exist."
+    Write-Output "[✅] react.svg does not exist."
 }
 
 # Remove vite.svg if it exists
 $appCssPath = "public/vite.svg"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[INFO] Removing vite.svg successfully."
+    Write-Output "[✅] Removing vite.svg successfully."
 } else {
-    Write-Output "[INFO] vite.svg does not exist."
+    Write-Output "[✅] vite.svg does not exist."
 }
 
 code .
