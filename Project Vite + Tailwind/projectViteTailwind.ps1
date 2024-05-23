@@ -13,17 +13,22 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     $selectedFolder = $folderBrowser.SelectedPath
     Set-Location $selectedFolder
 } else {
-    Write-Host "[❌] Folder selection canceled."
+    Write-Host "[ERROR] Folder selection canceled." -ForegroundColor Red
     exit
 }
 
 # Prompt for project name
 $projectName = Read-Host "Enter Project Name: "
 
+if ([string]:IsNullOrWhiteSpace($projectName)) {
+    Write-Host "[ERROR] Project name cannot be empty." -ForegroundColor Red
+    exit
+}
+
 # Create the Vite project
 npm create vite@latest $projectName --
 
-Write-Host "[✅] Project Created Successfully!"
+Write-Host "[SUCCESS] Project Created Successfully!" -ForegroundColor Green
 
 # Navigate to the project directory
 Set-Location $projectName
@@ -35,7 +40,7 @@ npm install -D tailwindcss postcss autoprefixer
 # Initialize Tailwind CSS
 npx tailwindcss init -p
 
-Write-Host "[✅] Tailwind Installed Successfully!"
+Write-Host "[SUCCESS] Tailwind Installed Successfully!" -ForegroundColor Green
 
 # Configure Tailwind
 $tailwindConfigPath = "tailwind.config.js"
@@ -54,15 +59,15 @@ export default {
 '@
 
 Set-Content -Path $tailwindConfigPath -Value $tailwindConfigContent
-Write-Output "[✅] tailwind.config.js content has been replaced successfully."
+Write-Output "[SUCCESS] tailwind.config.js content has been replaced successfully." -ForegroundColor Green
 
 # Remove app.css if it exists
 $appCssPath = "src/app.css"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[✅] Removing app.css successfully."
+    Write-Output "[SUCCESS] Removing app.css successfully." -ForegroundColor Green
 } else {
-    Write-Output "[✅] app.css does not exist."
+    Write-Output "[SUCCESS] app.css does not exist." -ForegroundColor Green
 }
 
 # Add Tailwind directives to index.css
@@ -74,7 +79,7 @@ $indexCssContent = @'
 '@
 
 Set-Content -Path $indexCssPath -Value $indexCssContent
-Write-Output "[INFO] Added the Tailwind directives to your CSS successfully."
+Write-Output "[SUCCESS] Added the Tailwind directives to your CSS successfully." -ForegroundColor Green
 
 # Clean the App.jsx or App.tsx file
 $appTsxPath = "src/App.tsx"
@@ -94,12 +99,12 @@ export default App
 
 if (Test-Path -Path $appTsxPath) {
     Set-Content -Path $appTsxPath -Value $appComponentContent
-    Write-Output "[✅] Cleaned the App.tsx file successfully."
+    Write-Output "[SUCCESS] Cleaned the App.tsx file successfully." -ForegroundColor Green
 } elseif (Test-Path -Path $appJsxPath) {
     Set-Content -Path $appJsxPath -Value $appComponentContent
-    Write-Output "[✅] Cleaned the App.jsx file successfully."
+    Write-Output "[SUCCESS] Cleaned the App.jsx file successfully." -ForegroundColor Green
 } else {
-    Write-Output "[✅] App component file does not exist."
+    Write-Output "[SUCCESS] App component file does not exist." -ForegroundColor Green
 }
 
 
@@ -107,18 +112,18 @@ if (Test-Path -Path $appTsxPath) {
 $appCssPath = "src/assets/react.svg"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[✅] Removing react.svg successfully."
+    Write-Output "[SUCCESS] Removing react.svg successfully." -ForegroundColor Green
 } else {
-    Write-Output "[✅] react.svg does not exist."
+    Write-Output "[SUCCESS] react.svg does not exist." -ForegroundColor Green
 }
 
 # Remove vite.svg if it exists
 $appCssPath = "public/vite.svg"
 if (Test-Path -Path $appCssPath) {
     Remove-Item -Path $appCssPath -Force
-    Write-Output "[✅] Removing vite.svg successfully."
+    Write-Output "[SUCCESS] Removing vite.svg successfully." -ForegroundColor Green
 } else {
-    Write-Output "[✅] vite.svg does not exist."
+    Write-Output "[SUCCESS] vite.svg does not exist." -ForegroundColor Green
 }
 
 code .
