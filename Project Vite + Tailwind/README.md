@@ -14,7 +14,6 @@ To deploy this project, follow these steps:
 - Click unblock 
 - Right-click the script and run it with PowerShell.
 - Fill up the inputs when prompted, and you are good to go!
-- Make sure to check the README.txt file to get your Tailwind configurations.
 
 
 ## Contributing
