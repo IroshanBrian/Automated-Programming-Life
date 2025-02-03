@@ -10,6 +10,8 @@ Powershell script to create a Vite application and install Tailwind with a few s
 
 To deploy this project, follow these steps:
 
+- Right-click the script and go to properties
+- Click unblock 
 - Right-click the script and run it with PowerShell.
 - Fill up the inputs when prompted, and you are good to go!
 - Make sure to check the README.txt file to get your Tailwind configurations.
